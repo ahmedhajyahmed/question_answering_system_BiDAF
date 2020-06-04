@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Bi-DAF Web app</title>
@@ -43,14 +43,27 @@
 					Test our QR Model
 				</span>
 
-				<div class="wrap-input100 validate-input" data-validate = "Message is required">
+
+
+				<span class="label-input100">Choose one of our Contexts or create your own</span>
+				<select class="wrap-input100 validate-input" id="select" onchange="changeOption()">
+					{%for i in range(0,len)%}
+					<option value='{{contexts[i]}}'>Context {{i+1}}</option>
+
+					{%endfor%}
+
+				</select>
+				<span class="focus-input100"></span>
+
+
+				<div class="wrap-input100 validate-input" data-validate="The Context is required">
 					<span class="label-input100">Context</span>
-					<textarea class="input100" name="message" placeholder="Enter a short text"></textarea>
+					<textarea class="input100" name="message" placeholder="Enter a short text" id="contextBox" rows="13"></textarea>
 					<span class="focus-input100"></span>
 				</div>
 
 
-				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="A query is required">
 					<span class="label-input100">Your Question</span>
 					<input class="input100" type="text" name="name" placeholder="Enter a question">
 					<span class="focus-input100"></span>
@@ -72,6 +85,18 @@
 
 
 	<div id="dropDownSelect1"></div>
+
+	<script t^ype="text/javascript">
+	function changeOption() {
+		var selectBox = document.getElementById("select");
+		var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+		var ContextBox = document.getElementById("contextBox");
+
+		ContextBox.value = selectedValue;
+			
+	
+        }
+	</script>
 
 <!--===============================================================================================-->
 	<script src="{{ url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
