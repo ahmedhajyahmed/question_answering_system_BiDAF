@@ -10,9 +10,11 @@ app= Flask(__name__)
 
 @app.route("/",methods=['POST'])
 def index():
+
 	if request.method == 'POST':
 		context= request.form['context']
 		question= request.form['question']
 		print(context)
 		print(question)
-	return render_template('index.html')
+	return render_template('index.html', contexts=contexts , len=len(contexts))
+

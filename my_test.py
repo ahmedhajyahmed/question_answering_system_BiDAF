@@ -18,11 +18,12 @@ from collections import Counter
 from setup import get_embedding, process_file, build_features
 import json
 
-def test_model(args, questions, context):
+def test_model(questions, context):
     # Set up logging
     #args.save_dir = util.get_save_dir(args.save_dir, args.name, training=False)
     #log = util.get_logger(args.save_dir, args.name)
     #log.info(f'Args: {dumps(vars(args), indent=4, sort_keys=True)}')
+    args = get_test_args()
     device, gpu_ids = util.get_available_devices()
     args.batch_size *= max(1, len(gpu_ids))
 
@@ -127,10 +128,10 @@ def test_model(args, questions, context):
         #print(el, sub_dict[el])
     return pred_dict
 
-def main(args):
+def main():
     questions = ["how old is ahmed ?", "with whom does ahmed live ?", "who killed kenedy"]
     context = "ahmed is 22 years old . he lives in ariana with his family and friends"
-    pred_dict = test_model(args, questions, context)
+    pred_dict = test_model(questions, context)
     
     for el in pred_dict:
         print(el, pred_dict[el])
@@ -138,4 +139,4 @@ def main(args):
 
 
 if __name__ == '__main__':
-    main(get_test_args())
+    main()
