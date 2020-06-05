@@ -72,8 +72,8 @@
         $('.wrap-contact100').fadeOut(400);
     })
 
-    /*$('.contact100-btn-show').on('click', function(){
+    $('.contact100-btn-show').on('click', function(){
         $('.wrap-contact100').fadeIn(400);
-    })*/
+    })
 
 })(jQuery);
