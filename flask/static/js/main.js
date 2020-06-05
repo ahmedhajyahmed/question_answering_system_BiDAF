@@ -68,12 +68,12 @@
     /*==================================================================
     [ Show / hide Form ]*/
     
-    $('.contact100-btn-hide').on('click', function(){
+    $('.contact100-form-btn').on('click', function(){
         $('.wrap-contact100').fadeOut(400);
     })
 
-    $('.contact100-btn-show').on('click', function(){
+    /*$('.contact100-btn-show').on('click', function(){
         $('.wrap-contact100').fadeIn(400);
-    })
+    })*/
 
 })(jQuery);

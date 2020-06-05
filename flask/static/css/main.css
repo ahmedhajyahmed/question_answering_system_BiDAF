@@ -197,7 +197,6 @@ iframe {
   border-radius: 10px;
   padding: 82px 180px 33px 180px;
   position: relative;
-  display: none;
 }
 
 .show-wrap-contact100 {
@@ -552,6 +551,7 @@ textarea.input100 {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  display: none;
 }
 
 .contact100-btn-show::before {
