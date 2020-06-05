@@ -23,20 +23,20 @@ def test_model(questions, context):
     #args.save_dir = util.get_save_dir(args.save_dir, args.name, training=False)
     #log = util.get_logger(args.save_dir, args.name)
     #log.info(f'Args: {dumps(vars(args), indent=4, sort_keys=True)}')
-    args = get_test_args()
+    #args = get_test_args()
     device, gpu_ids = util.get_available_devices()
-    args.batch_size *= max(1, len(gpu_ids))
+    batch_size = 64 * max(1, len(gpu_ids))
 
     # Get embeddings
     #print('Loading embeddings...')
-    word_vectors = util.torch_from_json(args.word_emb_file)
+    word_vectors = util.torch_from_json('../data/word_emb.json')
 
     # Get model
     #print('Building model...')
     model = BiDAF(word_vectors=word_vectors,
-                  hidden_size=args.hidden_size)
+                  hidden_size=100)
     model = nn.DataParallel(model, gpu_ids)
-    model_path = "./save/training-02/best.pth.tar"
+    model_path = "../save/training-02/best.pth.tar"
     #print(f'Loading checkpoint from {args.load_path}...')
     model = util.load_model(model, model_path, gpu_ids, return_step=False)
     model = model.to(device)
@@ -63,19 +63,19 @@ def test_model(questions, context):
                        }]   
               }
     word_counter, char_counter = Counter(), Counter()
-    with open("./data/word2idx.json","r") as f1:
+    with open("../data/word2idx.json","r") as f1:
         word2idx_dict = json.load(f1)
-    with open("./data/char2idx.json","r") as f2:
+    with open("../data/char2idx.json","r") as f2:
         char2idx_dict = json.load(f2)
     my_test_examples, my_test_eval = process_file(source, "my_test", word_counter, char_counter)
-    npz = build_features(args, my_test_examples, "my_test",
+    npz = build_features(my_test_examples, "my_test",
                                word2idx_dict, char2idx_dict, is_test=True)
     #my code end here
-    dataset = SQuAD(npz, args.use_squad_v2)
+    dataset = SQuAD(npz, True)
     data_loader = data.DataLoader(dataset,
-                                  batch_size=args.batch_size,
+                                  batch_size=batch_size,
                                   shuffle=False,
-                                  num_workers=args.num_workers,
+                                  num_workers=4,
                                   collate_fn=collate_fn)
 
     # Evaluate
@@ -102,7 +102,7 @@ def test_model(questions, context):
 
             # Get F1 and EM scores
             p1, p2 = log_p1.exp(), log_p2.exp()
-            starts, ends = util.discretize(p1, p2, args.max_ans_len, args.use_squad_v2)
+            starts, ends = util.discretize(p1, p2, 15, True)
             print("starts ",starts," ends ", ends)
 
             # Log info
@@ -115,7 +115,7 @@ def test_model(questions, context):
                                                       ids.tolist(),
                                                       starts.tolist(),
                                                       ends.tolist(),
-                                                      args.use_squad_v2)
+                                                      True)
             pred_dict.update(idx2pred)
             sub_dict.update(uuid2pred)
             

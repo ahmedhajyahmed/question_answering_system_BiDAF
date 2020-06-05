@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
  #some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, 'D:/Amine/Documents/GitHub/question_answering_system_BiDAF')
+sys.path.insert(1, 'C:/Users/ASUS/Desktop/PFA flask/question_answering_system_BiDAF')
+
 
 from my_test import test_model
 
@@ -18,6 +19,8 @@ def index():
 	if request.method == 'POST':
 		context= request.form['context']
 		question= request.form['question']
+		dataset=request.form['dataset']
+		print(dataset)
 		print(context)
 		print(question)
 		dict = test_model([question], context)
