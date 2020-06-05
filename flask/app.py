@@ -26,5 +26,5 @@ def index():
 		dict = test_model([question], context)
 		for el in dict:
 			print(el, dict[el])
-		return	render_template('reponse.html',context=context,question=question,reponse=dict[1])
+		return	render_template('reponse.html',context=context,question=question,reponse=dict["1"])
 	return render_template('index.html', contexts=contexts , len=len(contexts))
