@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-# some_file.py
+ #some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, 'D:/Amine/Documents/GitHub/question_answering_system_BiDAF')
@@ -23,5 +23,5 @@ def index():
 		dict = test_model([question], context)
 		for el in dict:
 			print(el, dict[el])
+		return	render_template('reponse.html',context=context,question=question,reponse=dict[1])
 	return render_template('index.html', contexts=contexts , len=len(contexts))
-
