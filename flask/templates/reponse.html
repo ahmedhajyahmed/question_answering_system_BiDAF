@@ -38,28 +38,37 @@
 
 		<div class="wrap-contact100">
 			
-			<div class="contact100-form validate-form">
+			<div class="contact100-form ">
 				<span class="contact100-form-title">
 					Test our QR Model
 				</span>
 
-				<div class="wrap-input100 validate-input" data-validate = "Message is required">
+				<div class="wrap-input100 " >
 					<span class="label-input100">Context</span>
 					<p class="input100" name="message">{{context}}</p>
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+				<div class="wrap-input100 rs1-wrap-input100 " >
 					<span class="label-input100">Your Question</span>
 					<p class="input100">{{question}}</p>
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+				<div class="wrap-input100 rs1-wrap-input100 " >
 					<span class="label-input100">The answer</span>
 					<p class="input100">{{reponse}}</p>
 					<span class="focus-input100"></span>
 				</div>
+
+
+				<form method="get">
+					<button class="contact100-form-btn" type="submit">
+						Return
+
+					</button>
+				</form>
+
 			</div>
 
 		</div>

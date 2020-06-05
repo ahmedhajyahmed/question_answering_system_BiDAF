@@ -68,7 +68,10 @@
     /*==================================================================
     [ Show / hide Form ]*/
     
-    $('.contact100-form-btn').on('click', function(){
+	
+	
+	
+    $('.myFade').on('click', function(){
         $('.wrap-contact100').fadeOut(400);
     })
 
