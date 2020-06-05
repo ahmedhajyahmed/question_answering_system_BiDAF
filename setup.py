@@ -242,7 +242,7 @@ def is_answerable(example):
     return len(example['y2s']) > 0 and len(example['y1s']) > 0
 
 
-def build_features(args, examples, data_type, word2idx_dict, char2idx_dict, is_test=False):
+def build_features(examples, data_type, word2idx_dict, char2idx_dict, is_test=False):
     para_limit = 1000
     ques_limit = 100
     ans_limit = 30
@@ -365,19 +365,19 @@ def pre_process(args):
 
     # Process dev and test sets
     dev_examples, dev_eval = process_file(args.dev_file, "dev", word_counter, char_counter)
-    build_features(args, train_examples, "train", args.train_record_file, word2idx_dict, char2idx_dict)
-    dev_meta = build_features(args, dev_examples, "dev", args.dev_record_file, word2idx_dict, char2idx_dict)
+    build_features(train_examples, "train", args.train_record_file, word2idx_dict, char2idx_dict)
+    dev_meta = build_features(dev_examples, "dev", args.dev_record_file, word2idx_dict, char2idx_dict)
     if args.include_test_examples:
         test_examples, test_eval = process_file(args.test_file, "test", word_counter, char_counter)
         save(args.test_eval_file, test_eval, message="test eval")
-        test_meta = build_features(args, test_examples, "test",
+        test_meta = build_features(test_examples, "test",
                                    args.test_record_file, word2idx_dict, char2idx_dict, is_test=True)
         save(args.test_meta_file, test_meta, message="test meta")
         
     # Process my_test sets
     my_test_examples, my_test_eval = process_file("./data/my_test.json", "my_test", word_counter, char_counter)
     save("./data/my_test_eval.json", my_test_eval, message="my_test eval")
-    my_test_meta = build_features(args, my_test_examples, "my_test",
+    my_test_meta = build_features(my_test_examples, "my_test",
                                "./data/my_test.npz", word2idx_dict, char2idx_dict, is_test=True)
     save("./data/my_test_meta.json", my_test_meta, message="test meta")
     

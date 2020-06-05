@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 # some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, 'D:/Amine/Documents/GitHub/question_answering_system_BiDAF')
+sys.path.insert(1, 'C:/Users/ASUS/Desktop/my_test')
 
 from my_test import test_model
 
@@ -14,7 +14,7 @@ contexts= ['Building construction is the process of adding structure to real pro
 
 app= Flask(__name__)
 
-@app.route("/",methods=['POST'])
+@app.route("/",methods=['GET','POST'])
 def index():
 
 	if request.method == 'POST':
@@ -22,5 +22,8 @@ def index():
 		question= request.form['question']
 		print(context)
 		print(question)
+		dict = test_model([question], context)
+		for el in dict:
+			print(el, dict[el])
 	return render_template('index.html', contexts=contexts , len=len(contexts))
 
