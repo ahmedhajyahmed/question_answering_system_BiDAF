@@ -18,7 +18,7 @@ from collections import Counter
 from setup import get_embedding, process_file, build_features
 import json
 
-def test_model(questions, context):
+def test_model(questions, context, use_squad_v2= True):
     # Set up logging
     #args.save_dir = util.get_save_dir(args.save_dir, args.name, training=False)
     #log = util.get_logger(args.save_dir, args.name)
@@ -71,7 +71,7 @@ def test_model(questions, context):
     npz = build_features(my_test_examples, "my_test",
                                word2idx_dict, char2idx_dict, is_test=True)
     #my code end here
-    dataset = SQuAD(npz, True)
+    dataset = SQuAD(npz, use_squad_v2)
     data_loader = data.DataLoader(dataset,
                                   batch_size=batch_size,
                                   shuffle=False,
@@ -102,7 +102,7 @@ def test_model(questions, context):
 
             # Get F1 and EM scores
             p1, p2 = log_p1.exp(), log_p2.exp()
-            starts, ends = util.discretize(p1, p2, 15, True)
+            starts, ends = util.discretize(p1, p2, 15, use_squad_v2)
             print("starts ",starts," ends ", ends)
 
             # Log info
@@ -115,7 +115,7 @@ def test_model(questions, context):
                                                       ids.tolist(),
                                                       starts.tolist(),
                                                       ends.tolist(),
-                                                      True)
+                                                      use_squad_v2)
             pred_dict.update(idx2pred)
             sub_dict.update(uuid2pred)
             
