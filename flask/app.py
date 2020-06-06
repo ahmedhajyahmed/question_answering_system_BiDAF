@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
  #some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, 'C:/Users/ASUS/Desktop/PFA flask/question_answering_system_BiDAF')
+sys.path.insert(1, '../')
 
 
 from my_test import test_model
