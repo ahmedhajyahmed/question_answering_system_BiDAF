@@ -18,7 +18,7 @@ from collections import Counter
 from setup import get_embedding, process_file, build_features
 import json
 
-def test_model(questions, context, use_squad_v2= True):
+def test_model(questions, context, use_squad_v2= True, model_path="../save/training-02/best.pth.tar"):
     # Set up logging
     #args.save_dir = util.get_save_dir(args.save_dir, args.name, training=False)
     #log = util.get_logger(args.save_dir, args.name)
@@ -36,7 +36,7 @@ def test_model(questions, context, use_squad_v2= True):
     model = BiDAF(word_vectors=word_vectors,
                   hidden_size=100)
     model = nn.DataParallel(model, gpu_ids)
-    model_path = "../save/training-02/best.pth.tar"
+    #model_path = "../save/training-02/best.pth.tar"
     #print(f'Loading checkpoint from {args.load_path}...')
     model = util.load_model(model, model_path, gpu_ids, return_step=False)
     model = model.to(device)
@@ -53,7 +53,10 @@ def test_model(questions, context, use_squad_v2= True):
     for index,question in enumerate(questions):
         processed_question = {"question":question ,
                               "id": index,
-                              "answers": []
+                              "answers": [{
+                                                        "answer_start" : 0,
+                                                        "text" : "never mind"
+                                                }]
                              }
         processed_questions.append(processed_question)
     source = {

@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
  #some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, 'C:/Users/ASUS/Desktop/PFA flask/question_answering_system_BiDAF')
+#sys.path.insert(1, 'C:/Users/ASUS/Desktop/my_test')
+sys.path.insert(1, '../')
 
 
 from my_test import test_model
@@ -23,7 +24,17 @@ def index():
 		print(dataset)
 		print(context)
 		print(question)
-		dict = test_model([question], context)
+		use_squad_v2 = True
+		model_path = "../save/training-02/best.pth.tar"
+		if dataset == "squad 2.0":
+			print("true")
+			use_squad_v2 = True
+			model_path = "../save/training-squad-2.0/best.pth.tar"
+		else:
+			print("false")
+			use_squad_v2 = False
+			model_path = "../save/training-squad-1.0/best.pth.tar"			
+		dict = test_model([question], context, use_squad_v2, model_path)
 		for el in dict:
 			print(el, dict[el])
 		return	render_template('reponse.html',context=context,question=question,reponse=dict["1"])
