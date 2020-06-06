@@ -45,16 +45,22 @@
 
 
 				<span class="label-input100">Choose the dataset You want our model to work with</span>
-				<select class="wrap-input100 validate-input" id="selectDataset" name="dataset" >
-					<option value="squad 2.0">SQuAD 2.0</option>
-					<option value="squad 1.1">SQuAD 1.1</option>
-					
-				</select>
-			
+				<div class="form-check">
+  				<input class="form-check-input" type="radio" value="2" id="dataset1" name="dataset">
+  				<label class="form-check-label" for="dataset1">
+   				 SQuAD 2.0
+ 				 </label>
+				</div>
+				<div class="form-check">
+  				<input class="form-check-input" type="radio" value="1" id="dataset2" name="dataset">
+  				<label class="form-check-label" for="dataset2">
+   				 SQuAD 1.1
+ 				 </label>
+				</div>
 
 
 
-				<span class="label-input100">Choose one of our Contexts or create your own</span>
+				<span class="label-input100" style="margin-top: 30px">Choose one of our Contexts or create your own</span>
 				<select class="wrap-input100 validate-input" id="select" onchange="changeOption()">
 					{%for i in range(0,len)%}
 					<option value='{{contexts[i]}}'>Context {{i+1}}</option>
