@@ -23,7 +23,10 @@ def index():
 		print(dataset)
 		print(context)
 		print(question)
-		dict = test_model([question], context)
+		allow_squad_2=True
+		if(dataset == "1"):
+			allow_squad_2=False
+		dict = test_model([question], context,allow_squad_2)
 		for el in dict:
 			print(el, dict[el])
 		return	render_template('reponse.html',context=context,question=question,reponse=dict["1"])
