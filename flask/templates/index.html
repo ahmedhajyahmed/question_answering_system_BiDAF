@@ -30,10 +30,10 @@
 <body>
 
 
-	<div class="container-contact100" style="background-image: url({{ url_for('static', filename='images/back.jpg') }});">
+	<div class="container-contact100" style="background-image: url({{ url_for('static', filename='images/back1.jpg') }}); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
 
 		<button class="contact100-btn-show" disabled>
-			<i class="fa fa-envelope-o" aria-hidden="false"></i>
+			<i class="fa fa-hourglass" aria-hidden="false"></i>
 		</button>
 
 		<div class="wrap-contact100">
@@ -46,7 +46,7 @@
 
 				<span class="label-input100">Choose the dataset You want our model to work with</span>
 				<div class="form-check">
-  				<input class="form-check-input" type="radio" value="2" id="dataset1" name="dataset">
+  				<input class="form-check-input" type="radio" value="2" id="dataset1" name="dataset" checked>
   				<label class="form-check-label" for="dataset1">
    				 SQuAD 2.0
  				 </label>
@@ -71,7 +71,7 @@
 				<span class="focus-input100"></span>
 
 
-				<div class="wrap-input100 validate-input" data-validate="The Context is required">
+				<div class="wrap-input100 validate-input" data-validate="The Context is required" required>
 					<span class="label-input100">Context</span>
 
 					<textarea class="input100" name="context" placeholder="Enter a short text" id="contextBox" rows="13"></textarea>
@@ -82,7 +82,7 @@
 
 				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="A query is required">
 					<span class="label-input100">Your Question</span>
-					<input class="input100" type="text" name="question" placeholder="Enter a question">
+					<input class="input100" type="text" name="question" placeholder="Enter a question" required>
 					<span class="focus-input100"></span>
 				</div>
 

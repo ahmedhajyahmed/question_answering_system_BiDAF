@@ -35,9 +35,6 @@ def index():
 			use_squad_v2 = False
 			model_path = "../save/training-squad-1.0/best.pth.tar"			
 		dict = test_model([question], context, use_squad_v2, model_path)
-		#allow_squad_2=True
-		#if(dataset == "1"):
-		#	allow_squad_2=False
 		for el in dict:
 			print(el, dict[el])
 		return	render_template('reponse.html',context=context,question=question,reponse=dict["1"])
