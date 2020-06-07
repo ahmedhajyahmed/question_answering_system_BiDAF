@@ -1,4 +1,19 @@
 
+$(document).ready(function() {
+    $('.validate-input .input100').on('keyup', function() {
+    let empty = false;
+    console.log(empty)
+    $('.validate-input .input100').each(function() {
+      empty = $(this).val().length == 0;
+    });
+
+    if (empty)
+      $('.myFade').attr('disabled', 'disabled');
+    else
+      $('.myFade').attr('disabled', false);
+  });
+});    
+
 (function ($) {
     "use strict";
 
@@ -71,7 +86,7 @@
 	
 	
 	
-    $('.myFade').on('click', function(){
+    $('.contact100-form-btn').on('click', function(){
         $('.wrap-contact100').fadeOut(400);
     })
 
